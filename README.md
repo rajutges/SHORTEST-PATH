@@ -16,9 +16,13 @@
 <br/>
 
 -The goal of the task is to use Image Processing and OpenCV techniques to identify shortest route between an origin and a destination as well as detect presence of obstacles if any, on the path supposed to be traversed.
+<br/>
 -Write a code in python language using openCV techniques to solve the problem.
--you are supposed to run and test the code  on sample images provided in the folder “test_images
+<br/>
+-you are supposed to run and test the code  on sample images provided in the folder “test_images"
+<br/>
 -capture screenshots of testing on each test image respectively, and their screenshot should be like this:
+<br/>
  <img src="https://github.com/sultan99/react-on-lambda/raw/gh-pages/logo.svg?sanitize=true" width="110" height="110"/>
 <img>
 
