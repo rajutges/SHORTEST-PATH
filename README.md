@@ -32,8 +32,10 @@
 #### What to do?
 
 these thing to be done in the solution folder:
- - run and test them on sample images provided in the folder “test_images"
+
+ - code a python code named as "path.py"
  - curry and function composition
+ - run and test them on sample images provided in the folder “test_images"
  - easier testing and debugging
  - compact and clean code
  - fill all the asked parameters in an excel sheet named “Parameters_Sheet” in the folder named "problem_node"
@@ -44,45 +46,23 @@ these thing to be done in the solution folder:
 ## The command window shall display the following parameters
 - Process points: the points which has been processed including obstacle and source and destination.
 - Total Number of occupied grids: Number of grids having black or blue 
-- Coloured occupied grids
-- smooth integration to an existing React project with JSX
-- no transpiler necessary, can be run directly in browser
+- Coloured occupied grids: coordinates of blue colored grids
+- Total Number of coloured occupied grids: Number of blue colored grids
+- Dictionary keys of planned path: source and destination keys
+- Coordinates of planned path
 
 <br/>
 
-## Benchmarks
-[The project](https://github.com/sultan99/rol-vs-jsx) includes two applications written using 
-React on lambda and JSX for comparisons.
-
-The follow results were gained:
-
-**Render performance**
-- React on lambda: `8.50ms`
-- JSX: `9.97ms`
-
-Most of time RoL showed faster results from **3%** up to **10%** than JSX version.
+## Problem_node contains:
+- test_images
+- parameter_sheet
 <br/>
-
-**Bundle size**
-- React on lambda: `2.03KB`
-- JSX: `2.57KB`
-
-RoL bundle size is less than JSX version 26%, but here we need to take an account the library size: `2.77KB`.
-
-So the real advantage will be if the application size is larger than `11KB`.
-
-<br/>
-
-## Examples
-React on lambda demo projects:
-
-[Table component](https://github.com/sultan99/rol-table) is example of stateless components and function compositions.
-
-A live demo at [codesandbox](https://codesandbox.io/s/jjlo9m5jq5).
-
-Todos application:
- - [master branch](https://github.com/sultan99/rol-todos) - redux & ramda
- - [hooks branch](https://github.com/sultan99/rol-todos/tree/hooks) - no state management
+## solution_node contains:
+- Test_images
+- screenshots_solved
+- parameter_sheet
+- path.py code
+- different test images
 
 <br/>
 
@@ -117,212 +97,218 @@ render(
 <br/>
 
 ## Getting started
-The primary you will need to install `react-on-lambda` and `react`:
-
-```sh
-$ npm i react-on-lambda react -S
-```
-
-optionally you can install `styled-components` if you are going to use it:
-
-```sh
-$ npm i styled-components -S
-```
-<br/>
-
-## API documentation
-
-**Creating element and component**
-
-```js
-import λ, {div} from 'react-on-lambda'
-
-div(`Hello world!`)
-// jsx equivalent
-<div>Hello world!</div>
-
-λ.section({class: `sample`}, `Hello world!`)
-// jsx equivalent
-<section className="sample">Hello world!</section>
-
-λ(Provider, {store}, app)
-// jsx equivalent
-<Provider store={store}><App/></Provider>
-```
+-The primary you will need to install python 
+- you can use IDE to code such as spyder, jupyter_notebook etc.
 
 <br/>
 
-**Currying function**
 
-Endless currying until `children` or empty parameter is applied to the function.
+**Code path.py**
 
-```js
-const onClick = () => {} // just for demo
 
-const span = λ.span({className: `tag`})({color: green})({size: `large`}) // -> function
-span()
-// jsx equivalent
-<span className="tag" color="green" size="large"/>
+#####code are added to get the correcct output as per the task
 
-const btnPrimary = λ.button({primary: true}) // -> function
-btnPrimary({onClick}, `Save`)
-// jsx equivalent
-<button primary onClick={onClick}>Save</button>
-```
 
-So with currying you can predefine some properties of components.
+import cv2
+import numpy as np
+import time
+import collections  ###used in function
+from skimage.metrics import structural_similarity as ssim
 
-Or even you can override properties later.
+def shortest_path_algorithm1(grid, start):   
+    wall, clear, goal = "#", ".", "B"
+    width, height = 10,10
+    queue = collections.deque([[start]])
+    seen = set([start])
+    while queue:
+        path = queue.popleft()
+        x, y = path[-1]
+        if grid[y][x] == goal:
+            return path
+        for x2, y2 in ((x+1,y), (x-1,y), (x,y+1), (x,y-1)):
+            if 0 <= x2 < width and 0 <= y2 < height and grid[y2][x2] != wall and (x2, y2) not in seen:
+                queue.append(path + [(x2, y2)])
+                seen.add((x2, y2))
+                
+                
 
-```js
-const span = λ.span({size: `large`}) // -> function
-span({size: `small`}, `Sorry we changed our mind`)
-// jsx equivalent
-<span size="small">Sorry we changed our mind</span>
-```
+
+
+def traversal_window(image, stepSize, windowSize):
+    r =[]
+
+    for j in range(0,10):
+        for i in range(0,10):
+            r.append((60*i,60*j))
+    return r
+
+
+    ###############  slide a window across the image      #############################
+    
+    #####codes  areadded to get the corrected output as per the added function 
+
+
+def main(image_filename):
+    
+    
+    process_points=[]
+    full_grids = []        # List to store coordinates of occupied grid 
+    expected_path = {}        # Dictionary to store information regarding path planning      
+    
+    # load the image and define the window width and height
+    image = cv2.imread(image_filename)
+    (winW, winH) = (60, 60)        # Size of individual cropped images 
+
+    barrier = []            # List to store barrier (black tiles)  
+    index = [1,1]
+    blank_image = np.zeros((60,60,3), np.uint8)
+    list_images = [[blank_image for i in range(10)] for i in range(10)]     #array of list of images 
+    maze = [[0 for i in range(10)] for i in range(10)]             #matrix to represent the grids of individual cropped images
+
+    
+    ##########     Check if grids are colored ie not majorly white and termed these grids as full_grids ######
+    for (x, y) in traversal_window(image, stepSize=60, windowSize=(winW, winH)):
+        clone = image.copy()
+        cv2.rectangle(clone, (x, y), (x + winW, y + winH), (0, 255, 0), 2)
+        crop_img = image[y:y + winH,x:x + winW]                 #crop the image
+        #list_images[index[0]-1][index[1]-1] = crop_img.copy()
+        if (crop_img[30,30,1] < 100):
+            full_grids.append((int(x/60),int(y/60)))
+        if (crop_img[30,30,0] == 0):
+             print("barrier")
+            barrier.append((int(x/60),int(y/60)))
+        cv2.imshow("Window", clone)
+        cv2.waitKey(1)
+        time.sleep(0.0025)
+        index[1] = index[1] + 1                            
+        if(index[1]>10):
+            index[0] = index[0] + 1
+            index[1] = 1
+
+
+
+
+
+
+
+    ##########     Check if grids are black and add them to barrier list   ###########
+
+
+
+
+
+
+
+    
+
+    ####################       Write a statement to print the full_grids      ################
+    
+
+
+    
+    #Printing other info
+    
+    
+    
+
+
+
+    list_colored_grids = [n for n in full_grids if n not in barrier]    #Grids with objects (not black barrier)
+    process_points=full_grids
+    print("process points")
+    print(process_points)
+    print("Total no of Occupied Grids : ")
+    print(len(full_grids))
+    print("Colored Occupied Grids : ")
+    print (list_colored_grids)
+    print ("Total no of Colored Occupied Grids : " + (str(len(list_colored_grids))))
+    
+
+    #Compare each image in the list of objects with every other image in the same list
+    x = 0
+    source_x = 0
+    source_y = 0
+    grid = []
+    for j in range(0,10):
+        s = ""
+        for i in range(0,10):
+            if image[30 + 60*j,30 + 60*i,2] >230:
+                s = s + "."
+            elif image[30 + 60*j,30 + 60*i,2] <30:
+                s = s + "#"
+            else:
+                if x==0:
+                   sx = i #sourcex
+                   sy = j #sourceY
+                   s = s + "."
+                else:
+                   dx = i
+                   dy = j
+                   s = s + "B"
+                x = 1
+        grid.append(s)
+
+    
+  
+    
+    ########   Check if ssim score is greater than 0.9 or not ########
+
+
+
+    ########   Find the min path from the startimage to this similar image u=by calling shortest_path_algorithm function  ########
+    ########check if their is any process point or source and destination is occured or not
+    if len(list_colored_grids)!=0:
+        result =  shortest_path_algorithm1(grid, list_colored_grids[0])
+    else:
+        result=None
+ 
+    
+
+
+
+            
+    ########  Result contains the minimum path required
+    if result != None:
+        expected_path[(sx,sy),(dx,dy)] = list(['('+str(str(sx)+","+str(sy)+')'),result,len(result)])
+    else:
+        if len(list_colored_grids)!=0:
+            expected_path[(sx,sy),(dx,dy)] = list(["NO MATCH",[], 0])
+        else:
+            expected_path[(),()]=list(["NO MATCH",[], 0])  #####for the main_image
+
+   
+        
+
+   
+    print ("Dictionary Keys pf expected_path:")
+    print (expected_path.keys())
+   
+    
+    ##############  Write a statement to print the expected_path ###################
+
+    print("planned path")
+    print(expected_path)
+
+
+    return full_grids, expected_path
+    ############  Second Part done                            ################
+
+
+
+
+if __name__ == '__main__':
+
+    # change filename to check for other images
+    image_filename = "path_5.jpg" ### Add the image filename to the image_filename
+
+    main(image_filename)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 <br/>
 
-**Styling**
 
-`λ` wraps [styled-components](https://github.com/styled-components/styled-components) 
-and returns a function. 
->Installation of styled-components is optional
-
-```js
-import λ from 'react-on-lambda'
-
-const header = λ.h1`
-  color: #ff813f;
-  font-size: 22px;
-`
-
-const onClick = () => alert(`Hi!`)
-
-const app = λ.div(
-  header(`Welcome to React on λamda!`),
-  λ.button({onClick}, `OK`)
-)
-
-export default app
-```
-<br/>
-
-**Function mapKey**
-```js
-const pages = [`Home page`, `Portfolio`, `About`]
-
-λ.ul(
-  λ.mapKey(λ.li, pages)
-)
-
-// jsx equivalent
-<ul>
-  {pages.map((item, key) =>
-    <li key={key}>
-      {item}
-    </li>
-  )}
-</ul>
-```
-<br/>
-
-**Composition**
-```js
-const data = [
-  {id: 123, name: `Albert`, surname: `Einstein`},
-  {id: 124, name: `Daimaou `, surname: `Kosaka`},
-]
-
-const userList = λ.compose(
-  λ.div({class: `followers`}),
-  λ.ul,
-  λ.mapKey(λ.li),
-  λ.mapProps({key: `id`, children: `name`})
-)
-
-userList(data)
-
-// jsx equivalent
-const UserList = props => (
-  <div className="followers">
-    <ul>
-      {props.data.map(user =>
-        <li key={user.id}>
-          {user.name}
-        </li>
-      )}
-    </ul>
-  </div>
-)
-
-<UserList data={data}/>
-```
-<br/>
-
-**Nesting**
-```js
-const postPage = λ.nest(
-  λ.main({class: `app`}),
-  λ.section,
-  λ.article(`
-    Lorem ipsum dolor sit amet,
-    Ernestina Urbanski consectetur adipiscing elit.
-    Ut blandit viverra diam luctus luctus...
-  `),
-)
-
-// jsx equivalent
-const PostPage = () => (
-  <main className="app">
-    <section>
-      <article>
-        Lorem ipsum dolor sit amet,
-        Ernestina Urbanski consectetur adipiscing elit.
-        Ut blandit viverra diam luctus luctus...
-      </article>
-    </section>
-  </main>
-)
-```
-<br/>
-
-**Debug**
-
-```js
-const userList = λ.compose(
-  λ.div,
-  λ.ul,
-  λ.log(`after mapping`), // -> will log piping value
-  λ.mapKey(λ.li)
-)
-```
-
-<br/>
-
-## Editor configuration
-> Code highlighting in Atom
-
-<img src="https://raw.githubusercontent.com/sultan99/react-on-lambda/gh-pages/assets/snippet-atom.png" style="border-radius: 4px;"/>
-<br/>
-
-Personally I hate to use symbols `$` `_` it makes code look dirty and reminds me [Perl](https://regmedia.co.uk/2017/10/31/perl_code_example.png) or regular expression.
-I prefer to use Greek letter `λ` – short and meaningful.
-
-Of course you can use any identifier at your own choice:
-```js
-import l from 'react-on-lambda'
-// or 
-import {div, h1} from 'react-on-lambda'
-
-```
-
-If you like to try using `λ` you can setup hot key and CSS syntax highlighting following the instructions bellow:
-- [Github Atom](./docs/atom.md)
-- Microsoft VS Code (will be provided)
-
-<br/>
-<br/>
 
 ## Feedback 
 Any questions or suggestions?
@@ -335,6 +321,4 @@ You are welcome to discuss it on:
 <br/>
 <br/>
 
-<a href="https://www.buymeacoffee.com/KGEzqayNQ" target="_blank">
-  <img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg" alt="Buy Me A Coffee"/>
-</a>
+
