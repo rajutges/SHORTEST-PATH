@@ -293,8 +293,8 @@ Any questions or suggestions?
 
 You are welcome to discuss it on:
 
-[![Gitter](https://badges.gitter.im/react-on-lambda/community.svg)](https://gitter.im/react-on-lambda/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![message](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/sultan_arziev)
+[![mail] @ rajutges@gmail.com
+[![message]https://www.google.com/search?q=linkedin+image&sxsrf=ALeKk02H0uMGNcOCoNUGuYvmZogMYe4sEA:1605115976575&tbm=isch&source=iu&ictx=1&fir=03RRnUGK0_oRmM%252Cy3Cla4aYzYIkAM%252C_&vet=1&usg=AI4_-kRgSRNLIOL0wFD99_5BmZ4ImE7jDw&sa=X&ved=2ahUKEwiVle38gvvsAhV77XMBHV_OBtEQ9QF6BAgPEFU#imgrc=03RRnUGK0_oRmM)](https://www.linkedin.com/in/raju-ranjan-769839169/)
 
 <br/>
 <br/>
