@@ -19,7 +19,7 @@
 <br/>
 -Write a code in python language using openCV techniques to solve the problem.
 <br/>
--you are supposed to run and test the code  on sample images provided in the folder “test_images"
+-you are supposed to run and test the code  on sample images provided in the folder “problem_node"
 <br/>
 -capture screenshots of testing on each test image respectively, and their screenshot should be like this:
 <br/>
