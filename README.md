@@ -23,7 +23,7 @@
 <br/>
 -capture screenshots of testing on each test image respectively, and their screenshot should be like this:
 <br/>
- <img src="https://github.com/sultan99/react-on-lambda/raw/gh-pages/logo.svg?sanitize=true" width="110" height="110"/>
+ <img src="https://github.com/rajutges/SHORTEST-PATH/blob/main/solution_node/Screenshots_solved/path_3.png"/>
 <img>
 
 
