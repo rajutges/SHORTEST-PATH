@@ -23,24 +23,28 @@
 <br/>
 -capture screenshots of testing on each test image respectively, and their screenshot should be like this:
 <br/>
- <img src="https://github.com/rajutges/SHORTEST-PATH/blob/main/solution_node/Screenshots_solved/path_3.png"/>
-<img>
 
+ <img src="https://github.com/rajutges/SHORTEST-PATH/blob/main/solution_node/Screenshots_solved/path_3.png"/>
+
+-Remember that BLACK BOXES REPRESENT OBSTACLES and they should be avoided while BLUE BOXES REPRESENT THE STARTING AND ENDING Positions.
+<br/>
 
 #### What to do?
 
 these thing to be done in the solution folder:
- - run and test them on sample images provided in the folder “test_images
+ - run and test them on sample images provided in the folder “test_images"
  - curry and function composition
  - easier testing and debugging
  - compact and clean code
+ - fill all the asked parameters in an excel sheet named “Parameters_Sheet” in the folder named "problem_node"
+ - make a folder named "screenshot_solved" which contains the screenshots of tested images as per given in problem statement
  
 <br/>
 
-## Features
-- fun functional programming
-- output bundle size less ~22% than JSX
-- faster render and mount up to ~10% than JSX
+## The command window shall display the following parameters
+- Process points: the points which has been processed including obstacle and source and destination.
+- Total Number of occupied grids: Number of grids having black or blue 
+- Coloured occupied grids
 - smooth integration to an existing React project with JSX
 - no transpiler necessary, can be run directly in browser
 
