@@ -79,9 +79,9 @@ these thing to be done in the solution folder:
 
 **Code path.py**
 
+**complete code is given in the folder named "solution_node**
 
-
-
+**shortest path**
 
       #####code are added to get the correcct output as per the task
 
@@ -109,8 +109,8 @@ these thing to be done in the solution folder:
 
 
 
-
-Traversal window
+<br/>
+**Traversal window**
 <br/>
           def traversal_window(image, stepSize, windowSize):
             r =[]
@@ -119,25 +119,25 @@ Traversal window
                 for i in range(0,10):
                     r.append((60*i,60*j))
             return r
-<br/>            
-Check if grids are colored ie not majorly white and termed these grids as full_grids      
-        for (x, y) in traversal_window(image, stepSize=60, windowSize=(winW, winH)):
-            clone = image.copy()
-            cv2.rectangle(clone, (x, y), (x + winW, y + winH), (0, 255, 0), 2)
-            crop_img = image[y:y + winH,x:x + winW]                 #crop the image
-            #list_images[index[0]-1][index[1]-1] = crop_img.copy()
-            if (crop_img[30,30,1] < 100):
-                full_grids.append((int(x/60),int(y/60)))
-            if (crop_img[30,30,0] == 0):
-      #             print("barrier")
-                barrier.append((int(x/60),int(y/60)))
-            cv2.imshow("Window", clone)
-            cv2.waitKey(1)
-            time.sleep(0.0025)
-            index[1] = index[1] + 1                            
-            if(index[1]>10):
-                index[0] = index[0] + 1
-                index[1] = 1
+ ***Check if grids are colored ie not majorly white and termed these grids as full_grids **  *   
+           
+           for (x, y) in traversal_window(image, stepSize=60, windowSize=(winW, winH)):
+                clone = image.copy()
+                cv2.rectangle(clone, (x, y), (x + winW, y + winH), (0, 255, 0), 2)
+                crop_img = image[y:y + winH,x:x + winW]                 #crop the image
+                #list_images[index[0]-1][index[1]-1] = crop_img.copy()
+                if (crop_img[30,30,1] < 100):
+                    full_grids.append((int(x/60),int(y/60)))
+                if (crop_img[30,30,0] == 0):
+          #             print("barrier")
+                    barrier.append((int(x/60),int(y/60)))
+                cv2.imshow("Window", clone)
+                cv2.waitKey(1)
+                time.sleep(0.0025)
+                index[1] = index[1] + 1                            
+                if(index[1]>10):
+                    index[0] = index[0] + 1
+                    index[1] = 1
 
 
 
@@ -145,41 +145,14 @@ Check if grids are colored ie not majorly white and termed these grids as full_g
 
 
 
-        ##########     Check if grids are black and add them to barrier list   ###########
+     
 
 
 
 
-
-
-
-
-
-        ####################       Write a statement to print the full_grids      ################
-
-
-
-
-        #Printing other info
-
-
-
-
-      #First part done
-      ##############################################################################
-
-        list_colored_grids = [n for n in full_grids if n not in barrier]    #Grids with objects (not black barrier)
-        process_points=full_grids
-        print("process points")
-        print(process_points)
-        print("Total no of Occupied Grids : ")
-        print(len(full_grids))
-        print("Colored Occupied Grids : ")
-        print (list_colored_grids)
-        print ("Total no of Colored Occupied Grids : " + (str(len(list_colored_grids))))
-
-
-        #Compare each image in the list of objects with every other image in the same list
+     
+<br/>
+  ****Compare each image in the list of objects with every other image in the same list****
         x = 0
         source_x = 0
         source_y = 0
@@ -206,60 +179,15 @@ Check if grids are colored ie not majorly white and termed these grids as full_g
 
 
 
-        ########   Check if ssim score is greater than 0.9 or not ########
+     
 
 
 
-        ########   Find the min path from the startimage to this similar image u=by calling shortest_path_algorithm function  ########
-        ########check if their is any process point or source and destination is occured or not
-        if len(list_colored_grids)!=0:
-            result =  shortest_path_algorithm1(grid, list_colored_grids[0])
-        else:
-            result=None
+     
 
 
 
-
-
-
-        ########  Result contains the minimum path required
-        if result != None:
-            expected_path[(sx,sy),(dx,dy)] = list(['('+str(str(sx)+","+str(sy)+')'),result,len(result)])
-        else:
-            if len(list_colored_grids)!=0:
-                expected_path[(sx,sy),(dx,dy)] = list(["NO MATCH",[], 0])
-            else:
-                expected_path[(),()]=list(["NO MATCH",[], 0])  #####for the main_image
-
-
-
-
-
-        print ("Dictionary Keys pf expected_path:")
-        print (expected_path.keys())
-
-
-        ##############  Write a statement to print the expected_path ###################
-
-        print("planned path")
-        print(expected_path)
-
-
-        return full_grids, expected_path
-        ############  Second Part done                            ################
-
-
-
-
-      if __name__ == '__main__':
-
-        # change filename to check for other images
-        image_filename = "path_5.jpg" ### Add the image filename to the image_filename
-
-        main(image_filename)
-
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+  
 
 <br/>
 
