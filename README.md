@@ -79,7 +79,7 @@ these thing to be done in the solution folder:
 
 **Code path.py**
 
-**complete code is given in the folder named "solution_node**
+**complete code is given in the folder named "solution_node" **
 
 **shortest path**
 
@@ -111,7 +111,7 @@ these thing to be done in the solution folder:
 
 <br/>
 **Traversal window**
-<br/>
+
           def traversal_window(image, stepSize, windowSize):
             r =[]
             ###############  slide a window across the image      ############################
@@ -119,7 +119,7 @@ these thing to be done in the solution folder:
                 for i in range(0,10):
                     r.append((60*i,60*j))
             return r
- ***Check if grids are colored ie not majorly white and termed these grids as full_grids **  *   
+ **Check if grids are colored ie not majorly white and termed these grids as full_grids ** 
            
            for (x, y) in traversal_window(image, stepSize=60, windowSize=(winW, winH)):
                 clone = image.copy()
@@ -152,7 +152,7 @@ these thing to be done in the solution folder:
 
      
 <br/>
-  ****Compare each image in the list of objects with every other image in the same list****
+  **Compare each image in the list of objects with every other image in the same list**
         x = 0
         source_x = 0
         source_y = 0
