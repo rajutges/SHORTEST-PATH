@@ -110,40 +110,17 @@ these thing to be done in the solution folder:
 
 
 
-
-      def traversal_window(image, stepSize, windowSize):
-        r =[]
-        ###############  slide a window across the image      ############################
-        for j in range(0,10):
-            for i in range(0,10):
-                r.append((60*i,60*j))
-        return r
-        ###############  slide a window across the image      #############################
-
-        ###############  slide a window across the image      #############################
-
-        #####codes  areadded to get the corrected output as per the added function 
-
-
-      def main(image_filename):
-
-
-        process_points=[]
-        full_grids = []        # List to store coordinates of occupied grid 
-        expected_path = {}        # Dictionary to store information regarding path planning      
-
-        # load the image and define the window width and height
-        image = cv2.imread(image_filename)
-        (winW, winH) = (60, 60)        # Size of individual cropped images 
-
-        barrier = []            # List to store barrier (black tiles)  
-        index = [1,1]
-        blank_image = np.zeros((60,60,3), np.uint8)
-        list_images = [[blank_image for i in range(10)] for i in range(10)]     #array of list of images 
-        maze = [[0 for i in range(10)] for i in range(10)]             #matrix to represent the grids of individual cropped images
-
-
-        ##########     Check if grids are colored ie not majorly white and termed these grids as full_grids ######
+Traversal window
+<br/>
+          def traversal_window(image, stepSize, windowSize):
+            r =[]
+            ###############  slide a window across the image      ############################
+            for j in range(0,10):
+                for i in range(0,10):
+                    r.append((60*i,60*j))
+            return r
+<br/>            
+Check if grids are colored ie not majorly white and termed these grids as full_grids      
         for (x, y) in traversal_window(image, stepSize=60, windowSize=(winW, winH)):
             clone = image.copy()
             cv2.rectangle(clone, (x, y), (x + winW, y + winH), (0, 255, 0), 2)
