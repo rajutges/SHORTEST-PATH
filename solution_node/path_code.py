@@ -8,7 +8,7 @@ import time
 import collections  ###used in function
 from skimage.metrics import structural_similarity as ssim
 
-def shortest_path_algorithm1(grid, start):     #####function added to get the shortest path avoiding obstacle (as the function given dosen't avoiding the obstacles in code given )
+def shortest_path_algorithm1(grid, start):     
     wall, clear, goal = "#", ".", "B"
     width, height = 10,10
     queue = collections.deque([[start]])
