@@ -10,7 +10,7 @@
 
 
 # Problem Statement
-
+(As per given in E-ROBO contest held by IEEE NIT Patna ,I had participated)
 
 
 <br/>
@@ -33,7 +33,7 @@
 
 these thing to be done in the solution folder:
 
- - code a python code named as "path.py"
+ - code a python code named as "path_code.py"
  - curry and function composition
  - run and test them on sample images provided in the folder “test_images"
  - easier testing and debugging
@@ -77,7 +77,7 @@ these thing to be done in the solution folder:
 <br/>
 
 
-**Code path.py**
+**Code path_code.py**
 
 **complete code is given in the folder named "solution_node" **
 
