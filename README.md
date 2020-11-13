@@ -63,7 +63,7 @@ these thing to be done in the solution folder:
 - Test_images
 - screenshots_solved
 - parameter_sheet
-- path.py code
+- path_code.py code
 - different test images
 
 <br/>
